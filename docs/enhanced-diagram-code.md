@@ -6,7 +6,7 @@
 graph TD
     %% Executive Dashboard
     subgraph "EXECUTIVE DASHBOARD"
-        ED[📊 VAT COMPLIANCE AUTOMATION<br/>80% Manual Effort Reduction<br/>99.9% Accuracy | 100% Compliance]
+        ED[📊 VAT COMPLIANCE AUTOMATION<br/>80% Manual Effort Reduction<br/>99.9% Accuracy and 100% Compliance]
     end
 
     %% Main Process Flow with Multi-Audience Swimlanes
@@ -14,7 +14,7 @@ graph TD
         BU1[👤 Submit<br/>Supplier Invoice]
         BU2[👀 Review<br/>Tax Summary]
         BU3[✋ Handle<br/>Exceptions]
-        BU4[✅ Approve<br/>& Complete]
+        BU4[✅ Approve<br/>and Complete]
     end
 
     subgraph "SYSTEM AUTOMATION"
@@ -31,7 +31,7 @@ graph TD
         TI4[📡 Notify<br/>Status]
     end
 
-    subgraph "COMPLIANCE & AUDIT"
+    subgraph "COMPLIANCE AND AUDIT"
         CA1[📝 Create<br/>Audit Log]
         CA2[✅ Verify<br/>Compliance]
         CA3[📊 Generate<br/>Audit Trail]
