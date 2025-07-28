@@ -1,0 +1,86 @@
+Scenario 3 – AP, cross-border purchase
+Request 
+<AccrualRequest documentDate="2025-07-03" transactionType="PURCHASE">
+  <Buyer>
+    <Company>GLOBAL</Company>
+    <Division>EMEA</Division>
+    <Department>BE10</Department>
+    <Destination>
+      <Country>BELGIUM</Country>
+    </Destination>
+  </Buyer>
+  <Vendor>
+    <PhysicalOrigin>
+      <Country>NETHERLANDS</Country>
+    </PhysicalOrigin>
+    <TaxRegistration hasPhysicalPresenceIndicator="true" isoCountryCode="NL">
+      <TaxRegistrationNumber>NL392478923</TaxRegistrationNumber>
+    </TaxRegistration>
+  </Vendor>
+  <LineItem lineItemNumber="1">
+    <Purchase>Product</Purchase>
+    <ExtendedPrice>1000</ExtendedPrice>
+  </LineItem>
+</AccrualRequest>
+ 
+Response
+<AccrualResponse documentDate="2025-07-03" deliveryTerm="DAP" postToJournal="false" transactionType="PURCHASE">
+  <Buyer>
+    <Company>GLOBAL</Company>
+    <Division>EMEA</Division>
+    <Department>BE10</Department>
+    <Destination taxAreaId="800560000">
+      <Country>BELGIUM</Country>
+    </Destination>
+  </Buyer>
+  <Vendor>
+    <PhysicalOrigin taxAreaId="805280000">
+      <Country>NETHERLANDS</Country>
+    </PhysicalOrigin>
+    <TaxRegistration hasPhysicalPresenceIndicator="true" isoCountryCode="NL">
+      <TaxRegistrationNumber>NL392478923</TaxRegistrationNumber>
+    </TaxRegistration>
+  </Vendor>
+  <SubTotal>1000.0</SubTotal>
+  <Total>1210.0</Total>
+  <TotalTax>210.0</TotalTax>
+  <LineItem lineItemNumber="1">
+    <Purchase>Product</Purchase>
+    <Quantity>1.0</Quantity>
+    <ExtendedPrice>1000.0</ExtendedPrice>
+    <Taxes taxResult="TAXABLE" taxType="VAT" taxCode="FVAT" rateClassification="Standard Rate" situs="DESTINATION" vertexTaxCode="BGSTIR" inputOutputType="INPUT_OUTPUT">
+      <Jurisdiction jurisdictionLevel="COUNTRY" jurisdictionId="78279">BELGIUM</Jurisdiction>
+      <CalculatedTax>210.0</CalculatedTax>
+      <EffectiveRate>0.21</EffectiveRate>
+      <Taxable>1000.0</Taxable>
+      <Imposition impositionId="1">VAT</Imposition>
+      <ImpositionType impositionTypeId="19">VAT</ImpositionType>
+      <TaxRuleId>301037025</TaxRuleId>
+      <RecoverableAmount>210.0</RecoverableAmount>
+      <RecoverablePercent>1.0</RecoverablePercent>
+      <BlockingRecoverablePercent>1.0</BlockingRecoverablePercent>
+      <PartialExemptRecoverablePercent>1.0</PartialExemptRecoverablePercent>
+      <UnrecoverableAmount>0.0</UnrecoverableAmount>
+      <SellerRegistrationId>NL392478923</SellerRegistrationId>
+      <BuyerRegistrationId>BE 5678 567 111</BuyerRegistrationId>
+      <InvoiceTextCode>2</InvoiceTextCode>
+      <InvoiceTextCode>4</InvoiceTextCode>
+      <AssistedParameters>
+        <AssistedParameter paramName="tax.taxCode" phase="POST" ruleName="F VAT">FVAT</AssistedParameter>
+        <AssistedParameter paramName="tax.vertexTaxCode" phase="POST" ruleName="AP Taxcode">BGSTIR</AssistedParameter>
+      </AssistedParameters>
+      <NominalRate>0.21</NominalRate>
+    </Taxes>
+    <TotalTax>210.0</TotalTax>
+    <FlexibleFields>
+      <FlexibleCodeField fieldId="20">X</FlexibleCodeField>
+    </FlexibleFields>
+    <AssistedParameters>
+      <AssistedParameter paramName="FLEX.output.Attrib" phase="POST" ruleName="Direct Attribution_irrecoverable">X</AssistedParameter>
+    </AssistedParameters>
+  </LineItem>
+</AccrualResponse>
+<ApplicationData>
+  <ResponseTimeMS>726.9</ResponseTimeMS>
+</ApplicationData>
+

@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build Documentation",
+			"type": "shell",
+			"command": "echo",
+			"args": [
+				"Documentation workspace ready! All VAT configuration guides have been created."
+			],
+			"group": "build",
+			"isBackground": false,
+			"problemMatcher": []
+		}
+	]
+}

@@ -1,0 +1,90 @@
+Scenario 4 – partly recoverable VAT
+Request
+<AccrualRequest documentDate="2025-07-03" transactionType="PURCHASE">
+  <Buyer>
+    <Company>GLOBAL</Company>
+    <Division>EMEA</Division>
+    <Department>NL10</Department>
+    <Destination>
+      <Country>NETHERLANDS</Country>
+    </Destination>
+  </Buyer>
+  <Vendor>
+    <PhysicalOrigin>
+      <Country>NETHERLANDS</Country>
+    </PhysicalOrigin>
+    <TaxRegistration hasPhysicalPresenceIndicator="true" isoCountryCode="NL">
+      <TaxRegistrationNumber>NL1297483</TaxRegistrationNumber>
+    </TaxRegistration>
+  </Vendor>
+  <LineItem lineItemNumber="1" costCenter="1234" generalLedgerAccount="10101">
+    <ExtendedPrice>100</ExtendedPrice>
+    <ChargedTax>19</ChargedTax>
+    <InputTax>
+      <TaxingJurisdictionLocation jurisdictionLevel="COUNTRY" taxAreaId="805280000">
+        <ImpositionType userDefined="false">VAT</ImpositionType>
+      </TaxingJurisdictionLocation>
+      <InputAmount>210</InputAmount>
+    </InputTax>
+  </LineItem>
+</AccrualRequest>
+
+Response
+<AccrualResponse documentDate="2025-07-03" postToJournal="false" transactionType="PURCHASE">
+  <Buyer>
+    <Company>GLOBAL</Company>
+    <Division>EMEA</Division>
+    <Department>NL10</Department>
+    <Destination taxAreaId="805280000">
+      <Country>NETHERLANDS</Country>
+    </Destination>
+  </Buyer>
+  <Vendor>
+    <PhysicalOrigin taxAreaId="805280000">
+      <Country>NETHERLANDS</Country>
+    </PhysicalOrigin>
+    <TaxRegistration hasPhysicalPresenceIndicator="true" isoCountryCode="NL">
+      <TaxRegistrationNumber>NL1297483</TaxRegistrationNumber>
+    </TaxRegistration>
+  </Vendor>
+  <SubTotal>100.0</SubTotal>
+  <Total>310.0</Total>
+  <TotalTax>210.0</TotalTax>
+  <LineItem lineItemNumber="1" costCenter="1234" generalLedgerAccount="10101" partialExemptRecoverableOverridePercent="0.88">
+    <Quantity>1.0</Quantity>
+    <ExtendedPrice>100.0</ExtendedPrice>
+    <ChargedTax>19.0</ChargedTax>
+    <Taxes taxResult="TAXABLE" taxType="VAT" situs="DESTINATION" vertexTaxCode="IXXXX" inputOutputType="INPUT">
+      <Jurisdiction jurisdictionLevel="COUNTRY" jurisdictionId="78290">NETHERLANDS</Jurisdiction>
+      <CalculatedTax>210.0</CalculatedTax>
+      <EffectiveRate>2.1</EffectiveRate>
+      <Taxable>100.0</Taxable>
+      <Imposition impositionId="1">VAT</Imposition>
+      <ImpositionType impositionTypeId="19">VAT</ImpositionType>
+      <RecoverableAmount>184.8</RecoverableAmount>
+      <RecoverablePercent>0.88</RecoverablePercent>
+      <BlockingRecoverablePercent>1.0</BlockingRecoverablePercent>
+      <PartialExemptRecoverablePercent>0.88</PartialExemptRecoverablePercent>
+      <UnrecoverableAmount>25.2</UnrecoverableAmount>
+      <SellerRegistrationId>NL1297483</SellerRegistrationId>
+      <BuyerRegistrationId>NL382833323 B 02</BuyerRegistrationId>
+      <InvoiceTextCode>21</InvoiceTextCode>
+      <AssistedParameters>
+        <AssistedParameter paramName="tax.vertexTaxCode" phase="POST" ruleName="AP Taxcode">IXXXX</AssistedParameter>
+      </AssistedParameters>
+      <NominalRate>2.1</NominalRate>
+    </Taxes>
+    <TotalTax>210.0</TotalTax>
+    <FlexibleFields>
+      <FlexibleCodeField fieldId="20">R</FlexibleCodeField>
+    </FlexibleFields>
+    <AssistedParameters>
+      <AssistedParameter paramName="FLEX.output.Attrib" phase="POST" ruleName="Direct Attribution_Residual">R</AssistedParameter>
+      <AssistedParameter paramName="partialExemptRecoverableOverridePercent" phase="PRE" ruleName="Partial Exemption recovery" originalValue="0.0">0.88</AssistedParameter>
+    </AssistedParameters>
+  </LineItem>
+</AccrualResponse>
+<ApplicationData>
+  <ResponseTimeMS>460.7</ResponseTimeMS>
+</ApplicationData>
+

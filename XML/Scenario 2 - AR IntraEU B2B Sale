@@ -1,0 +1,92 @@
+Scenario 2 – AR IntraEU B2B Sale
+Note – key element: Customer VAT registration ID
+<InvoiceRequest documentDate="2025-07-03" transactionType="SALE">
+  <Seller>
+    <Company>GLOBAL</Company>
+    <Division>EMEA</Division>
+    <Department>BE10</Department>
+    <PhysicalOrigin>
+      <Country>BELGIUM</Country>
+    </PhysicalOrigin>
+  </Seller>
+  <Customer>
+    <Destination>
+      <Country>NETHERLANDS</Country>
+    </Destination>
+    <TaxRegistration hasPhysicalPresenceIndicator="true" isoCountryCode="NL">
+      <TaxRegistrationNumber>NL23487923748</TaxRegistrationNumber>
+    </TaxRegistration>
+  </Customer>
+  <LineItem lineItemNumber="1">
+    <Product>Product</Product>
+    <ExtendedPrice>1000</ExtendedPrice>
+  </LineItem>
+</InvoiceRequest>
+
+ 
+Response
+
+<InvoiceResponse documentDate="2025-07-03" deliveryTerm="DAP" transactionType="SALE">
+  <Seller>
+    <Company>GLOBAL</Company>
+    <Division>EMEA</Division>
+    <Department>BE10</Department>
+    <PhysicalOrigin taxAreaId="800560000">
+      <Country>BELGIUM</Country>
+    </PhysicalOrigin>
+  </Seller>
+  <Customer>
+    <CustomerCode isBusinessIndicator="true" />
+    <Destination taxAreaId="805280000">
+      <Country>NETHERLANDS</Country>
+    </Destination>
+    <TaxRegistration hasPhysicalPresenceIndicator="true" isoCountryCode="NL">
+      <TaxRegistrationNumber>NL23487923748</TaxRegistrationNumber>
+    </TaxRegistration>
+  </Customer>
+  <SubTotal>1000.0</SubTotal>
+  <Total>1000.0</Total>
+  <TotalTax>0.0</TotalTax>
+  <LineItem lineItemNumber="1">
+    <Product>Product</Product>
+    <Quantity>1.0</Quantity>
+    <FairMarketValue>1000.0</FairMarketValue>
+    <ExtendedPrice>1000.0</ExtendedPrice>
+    <Taxes taxResult="TAXABLE" taxType="VAT" rateClassification="Zero Rate" situs="PHYSICAL_ORIGIN" vertexTaxCode="OGZRIZ" inputOutputType="OUTPUT" taxCollectedFromParty="BUYER">
+      <Jurisdiction jurisdictionLevel="COUNTRY" jurisdictionId="78279">BELGIUM</Jurisdiction>
+      <CalculatedTax>0.0</CalculatedTax>
+      <EffectiveRate>0.0</EffectiveRate>
+      <Taxable>1000.0</Taxable>
+      <Imposition impositionId="1">VAT</Imposition>
+      <ImpositionType impositionTypeId="19">VAT</ImpositionType>
+      <SellerRegistrationId>BE 5678 567 111</SellerRegistrationId>
+      <BuyerRegistrationId>NL23487923748</BuyerRegistrationId>
+      <InvoiceTextCode>2</InvoiceTextCode>
+      <InvoiceTextCode>3</InvoiceTextCode>
+      <SummaryInvoiceText>
+        <![CDATA[Intra Community Supply Article 138 (1) EU Directive 2006/116. VAT to be accounted for by counterparty.]]>
+      </SummaryInvoiceText>
+      <AssistedParameters>
+        <AssistedParameter paramName="tax.vertexTaxCode" phase="POST" ruleName="AR Taxcode">OGZRIZ</AssistedParameter>
+        <AssistedParameter paramName="tax.summaryInvoiceText" phase="POST" ruleName="Invoice Wording">
+          <![CDATA[Intra Community Supply Article 138 (1) EU Directive 2006/116. VAT to be accounted for by counterparty.]]>
+        </AssistedParameter>
+      </AssistedParameters>
+    </Taxes>
+    <TotalTax>0.0</TotalTax>
+    <FlexibleFields>
+      <FlexibleCodeField fieldId="1">Goods</FlexibleCodeField>
+      <FlexibleCodeField fieldId="2">IntraEU</FlexibleCodeField>
+      <FlexibleCodeField fieldId="3">Zero Rate</FlexibleCodeField>
+    </FlexibleFields>
+    <AssistedParameters>
+      <AssistedParameter paramName="FLEX.output.G or S" phase="POST" ruleName="Service Indicator">Goods</AssistedParameter>
+      <AssistedParameter paramName="FLEX.output.PoS" phase="POST" ruleName="PoS">IntraEU</AssistedParameter>
+      <AssistedParameter paramName="FLEX.output.Rate" phase="POST" ruleName="Rate Class">Zero Rate</AssistedParameter>
+    </AssistedParameters>
+  </LineItem>
+</InvoiceResponse>
+<ApplicationData>
+  <ResponseTimeMS>764.9</ResponseTimeMS>
+</ApplicationData>
+

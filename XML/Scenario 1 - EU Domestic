@@ -1,0 +1,81 @@
+Scenario 1 – EU Domestic
+
+Request
+
+<InvoiceRequest documentDate="2025-07-03" transactionType="SALE">
+  <Seller>
+    <Company>GLOBAL</Company>
+    <Division>EMEA</Division>
+    <Department>BE10</Department>
+    <PhysicalOrigin>
+      <Country>BELGIUM</Country>
+    </PhysicalOrigin>
+  </Seller>
+  <Customer>
+    <Destination>
+      <Country>BELGIUM</Country>
+    </Destination>
+  </Customer>
+  <LineItem lineItemNumber="1">
+    <Product>Product</Product>
+    <ExtendedPrice>1000</ExtendedPrice>
+  </LineItem>
+</InvoiceRequest>
+
+
+ 
+Response
+InvoiceResponse documentDate="2025-07-03" deliveryTerm="DAP" transactionType="SALE">
+  <Seller>
+    <Company>GLOBAL</Company>
+    <Division>EMEA</Division>
+    <Department>BE10</Department>
+    <PhysicalOrigin taxAreaId="800560000">
+      <Country>BELGIUM</Country>
+    </PhysicalOrigin>
+  </Seller>
+  <Customer>
+    <Destination taxAreaId="800560000">
+      <Country>BELGIUM</Country>
+    </Destination>
+  </Customer>
+  <SubTotal>1000.0</SubTotal>
+  <Total>1210.0</Total>
+  <TotalTax>210.0</TotalTax>
+  <LineItem lineItemNumber="1">
+    <Product>Product</Product>
+    <Quantity>1.0</Quantity>
+    <FairMarketValue>1000.0</FairMarketValue>
+    <ExtendedPrice>1000.0</ExtendedPrice>
+    <Taxes taxResult="TAXABLE" taxType="VAT" rateClassification="Standard Rate" situs="DESTINATION" vertexTaxCode="OGSTC" inputOutputType="OUTPUT" taxCollectedFromParty="BUYER">
+      <Jurisdiction jurisdictionLevel="COUNTRY" jurisdictionId="78279">BELGIUM</Jurisdiction>
+      <CalculatedTax>210.0</CalculatedTax>
+      <EffectiveRate>0.21</EffectiveRate>
+      <Taxable>1000.0</Taxable>
+      <Imposition impositionId="1">VAT</Imposition>
+      <ImpositionType impositionTypeId="19">VAT</ImpositionType>
+      <TaxRuleId>301037025</TaxRuleId>
+      <SellerRegistrationId>BE 5678 567 111</SellerRegistrationId>
+      <InvoiceTextCode>21</InvoiceTextCode>
+      <AssistedParameters>
+        <AssistedParameter paramName="tax.vertexTaxCode" phase="POST" ruleName="AR Taxcode">OGSTC</AssistedParameter>
+      </AssistedParameters>
+      <NominalRate>0.21</NominalRate>
+    </Taxes>
+    <TotalTax>210.0</TotalTax>
+    <FlexibleFields>
+      <FlexibleCodeField fieldId="1">Goods</FlexibleCodeField>
+      <FlexibleCodeField fieldId="2">Domestic</FlexibleCodeField>
+      <FlexibleCodeField fieldId="3">Standard Rate</FlexibleCodeField>
+    </FlexibleFields>
+    <AssistedParameters>
+      <AssistedParameter paramName="FLEX.output.G or S" phase="POST" ruleName="Service Indicator">Goods</AssistedParameter>
+      <AssistedParameter paramName="FLEX.output.PoS" phase="POST" ruleName="PoS">Domestic</AssistedParameter>
+      <AssistedParameter paramName="FLEX.output.Rate" phase="POST" ruleName="Rate Class">Standard Rate</AssistedParameter>
+    </AssistedParameters>
+  </LineItem>
+</InvoiceResponse>
+<ApplicationData>
+  <ResponseTimeMS>19005.5</ResponseTimeMS>
+</ApplicationData>
+
